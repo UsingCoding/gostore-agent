@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	version = "v0.0.5"
+	version = "v1.0.0"
 )
 
 type Release mg.Namespace
