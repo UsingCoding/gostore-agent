@@ -36,6 +36,12 @@ brews:
       (var/"run").mkpath
       system "#{bin}/gostore-agent", "install"
 
+    service: |
+      run [opt_bin/"gostore-agent", "-l", var/"run/gostore-agent.sock"]
+      keep_alive true
+      log_path var/"log/gostore-agent.log"
+      error_log_path var/"log/gostore-agent.log"
+
 archives:
   - format: tar.gz
     # Use zip for Windows archives
