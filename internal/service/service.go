@@ -60,7 +60,8 @@ type InstallParams struct {
 
 func (s Service) Install(params InstallParams) error {
 	if exists(params.ConfigPath) {
-		return errors.New("config already exists")
+		s.Logger.Infoln("Config already exists, skip")
+		return nil
 	}
 
 	dir := filepath.Dir(params.ConfigPath)

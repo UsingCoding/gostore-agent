@@ -21,8 +21,8 @@ builds:
       - arm64
     ldflags:
       - -s -w
-      - -X github.com/UsingCoding/gostore-agent/main.Version={{.RawVersion}}
-      - -X github.com/UsingCoding/gostore-agent/main.Commit={{.Commit}}
+      - -X main.version={{.RawVersion}}
+      - -X main.commit={{.Commit}}
 
 brews:
   - name: gostore-agent
