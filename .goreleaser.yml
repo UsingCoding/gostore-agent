@@ -37,7 +37,7 @@ brews:
       system "#{bin}/gostore-agent", "install"
 
     service: |
-      run [opt_bin/"gostore-agent", "-l", var/"run/gostore-agent.sock"]
+      run [opt_bin/"gostore-agent", "-s", var/"run/gostore-agent.sock"]
       keep_alive true
       log_path var/"log/gostore-agent.log"
       error_log_path var/"log/gostore-agent.log"
