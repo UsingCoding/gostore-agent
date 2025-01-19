@@ -1,0 +1,46 @@
+run:
+  issues-exit-code: 1
+
+linters:
+  enable:
+    - errcheck
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - typecheck
+    - unused
+    - bodyclose
+    - dogsled
+    - dupl
+    - gochecknoinits
+    - gocognit
+    - gocritic
+    - gocyclo
+    - gofmt
+    - goimports
+    - gosec
+    - misspell
+    - nakedret
+    - prealloc
+    - stylecheck
+    - unconvert
+    - whitespace
+    - rowserrcheck
+    - goconst
+    - asciicheck
+    - nestif
+    - copyloopvar
+    - sqlclosecheck
+    - revive
+
+linters-settings:
+  goimports:
+    local-prefixes: gostore-agent
+  gocritic:
+    disabled-checks:
+      - sloppyReassign
+      - whyNoLint
+    enabled-tags:
+      - experimental
+      - opinionated

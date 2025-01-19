@@ -1,0 +1,71 @@
+version: 2
+
+project_name: gostore-agent
+
+before:
+  hooks:
+    - mage
+
+builds:
+  - id: gostore-agent
+    main: ./cmd/gostore-agent
+    binary: gostore-agent
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w
+      - -X github.com/UsingCoding/gostore-agent/main.Version={{.RawVersion}}
+      - -X github.com/UsingCoding/gostore-agent/main.Commit={{.Commit}}
+
+brews:
+  - name: gostore-agent
+    description: "Agent to expose ssh keys stored in gostore over ssh-agent"
+    homepage: "https://github.com/UsingCoding/gostore"
+    repository:
+      owner: UsingCoding
+      name: homebrew-public
+    # make dir for agent and install config
+    post_install: |
+      (var/"run").mkpath
+      system "#{bin}/gostore-agent", "install"
+
+archives:
+  - format: tar.gz
+    # Use zip for Windows archives
+    format_overrides:
+      - goos: windows
+        format: zip
+    files:
+      - LICENSE*
+      - README*
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- .Version }}_
+      {{- .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+
+checksum:
+  name_template: 'checksums.txt'
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^ci:'
+      - '^version-increment:'
+
+release:
+  github:
+    owner: UsingCoding
+    name: gostore-agent
